@@ -7,7 +7,7 @@
 })(typeof globalThis === 'object' ? globalThis : this, function () {
   'use strict';
   const TTL = 24 * 60 * 60 * 1000;
-  const MARKER = '\n\nOrigem da visita:';
+  const MARKER = '\n\nOrigem:';
   const clean = (value, max = 80) => String(value || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
   const path = value => clean(String(value || '/').split(/[?#]/)[0], 250);
   const hostIs = (host, domain) => host === domain || host.endsWith('.' + domain);
@@ -58,24 +58,20 @@
   }
 
   function describe(origin, currentPath) {
-    if (!origin?.first || !origin?.last) return '';
-    const first = origin.first, last = origin.last;
-    const lines = [`Origem da visita: ${clean(last.label, 160)}`];
-    if (last.campaign) lines.push(`Campanha: ${clean(last.campaign)}`);
-    if (last.campaignId) lines.push(`ID da campanha: ${clean(last.campaignId)}`);
-    if (last.content) lines.push(`Criativo: ${clean(last.content)}`);
-    if (first.source !== last.source || first.campaign !== last.campaign || first.medium !== last.medium) {
-      lines.push(`Primeira origem nesta aba: ${clean(first.label, 160)}${first.campaign ? ' · ' + clean(first.campaign) : ''}`);
-    }
-    lines.push(`Entrada no site: ${path(first.landing)}`);
-    if (last.landing !== first.landing) lines.push(`Última entrada identificada: ${path(last.landing)}`);
-    lines.push(`Página do pedido: ${path(currentPath)}`);
-    return lines.join('\n');
+    if (!origin?.last) return '';
+    const last = origin.last;
+    let label = last.channel === 'direto-ou-desconhecido' ? 'não identificada' : clean(last.label,160).replace(/ \(UTM[^)]*\)| \(referência do navegador\)/g,'');
+    if (last.channel === 'busca-organica') label = `${last.source?.startsWith('google.') ? 'Google' : last.source === 'bing.com' ? 'Bing' : 'Busca'} (orgânico)`;
+    if (last.channel === 'clique-identificado') label = `${last.source === 'meta' ? 'Meta' : 'Google'} (link identificado)`;
+    const parts = [`Origem: ${label}`];
+    if (last.campaign || last.campaignId) parts.push(`Campanha: ${clean(last.campaign || last.campaignId)}`);
+    if (last.content) parts.push(`Criativo: ${clean(last.content)}`);
+    return parts.join(' · ');
   }
 
   function append(message, origin, currentPath) {
     const details = describe(origin, currentPath);
-    const base = String(message || '').split(MARKER)[0];
+    const base = String(message || '').split(MARKER)[0].split('\n\nOrigem da visita:')[0];
     return details ? `${base}\n\n${details}` : base;
   }
 
