@@ -1,0 +1,41 @@
+/* Campanha fotográfica: imagem ampla, leitura preservada e enquadramento dedicado ao mobile. */
+.hero-v3{position:relative;min-height:720px;height:min(850px,calc(100svh - 112px));padding:0!important;background:#30271f;isolation:isolate;color:#fbf9f4}
+.hero-v3 .hero-visual{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0;padding:0;z-index:-2;perspective:none}
+.hero-v3 .hero-image{width:100%;height:100%;border-radius:0;box-shadow:none;transform:translateY(var(--hero-y,0px)) scale(1.045);transform-origin:center;transition:transform .8s ease-out}
+.hero-v3 .hero-image picture{display:block;width:100%;height:100%}
+.hero-v3 .hero-image img{width:100%;height:100%;object-fit:cover;object-position:66% 50%}
+.hero-v3:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(24,18,13,.8),rgba(24,18,13,.36) 38%,transparent 72%);pointer-events:none}
+.hero-v3 .hero-grid{display:flex;align-items:center;height:100%;padding-block:56px 80px}
+.hero-v3 .hero-copy{max-width:590px}
+.hero-v3 h1{font-size:clamp(60px,6vw,88px);text-shadow:0 2px 24px #0002}
+.hero-v3 h1 em{color:#ead2b5}
+.hero-v3 .hero-copy .eyebrow{color:#f2e5d4;margin-bottom:24px}
+.hero-v3 .lede{font-size:17px;line-height:1.7;max-width:360px;margin-top:24px;color:#f2e9dd}
+.hero-v3 .button{background:#fbf9f4;color:#493522;border-color:#fbf9f4}
+.hero-v3 .button:hover{background:#ede6d8}
+.hero-v3 .button.secondary{color:#fbf9f4;background:#21180d22;border-color:#fbf9f480}
+.hero-v3 .button.secondary:hover{background:#fbf9f420}
+.hero-v3 .hero-foot{font-size:10px;color:#eadccb;margin-top:32px}
+.hero-v3 .hero-foot:before{background:#eadccb}
+.hero-bottom{position:absolute;bottom:20px;left:40px;right:40px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:10px;letter-spacing:.04em;color:#fbf9f4}
+.hero-bottom>span{padding:6px 10px;background:#20170faa}
+.hero-v3 .hero-motion-toggle{position:static;background:#20170faa;color:#fbf9f4;border-color:#fbf9f450;min-height:44px}
+.hero-v3.motion-on .hero-image img{animation:none}
+.campaign-terreiro{display:grid;grid-template-columns:1.55fr 1fr;gap:32px;align-items:start}
+.campaign-story figure,.campaign-everyday figure{margin:0;min-width:0}
+.campaign-photo{position:relative;overflow:hidden;background:var(--surface)}
+.campaign-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease-out}
+.campaign-photo:hover img{transform:scale(1.02)}
+.campaign-wide .campaign-photo{aspect-ratio:3/2}
+.campaign-tall{padding-top:80px}
+.campaign-tall .campaign-photo{aspect-ratio:4/5}
+.campaign-story figcaption,.campaign-everyday figcaption{font-size:12px;margin-top:14px;color:var(--muted)}
+.campaign-disclosure{font-size:11px;max-width:560px;color:var(--muted);margin-top:24px}
+.campaign-daily-grid{display:grid;grid-template-columns:1fr 1fr .8fr;gap:32px;align-items:center}
+.campaign-daily-grid .campaign-photo{aspect-ratio:4/5}
+.campaign-daily-grid figure:nth-child(2){padding-top:64px}
+.campaign-daily-copy h3{font-size:36px;margin-block:20px}
+.campaign-daily-copy>p:not(.eyebrow){font-size:14px;line-height:1.8;margin-bottom:24px}
+@media(min-width:641px) and (max-width:1000px){.hero-v3{min-height:660px}.hero-v3 .hero-copy{max-width:470px}.hero-v3 h1{font-size:64px}.campaign-daily-grid{grid-template-columns:1fr 1fr}.campaign-daily-copy{grid-column:1/-1;max-width:520px}.campaign-terreiro{gap:24px}}
+@media(max-width:640px){.hero-v3{height:calc(100svh - 110px);min-height:740px;max-height:960px}.hero-v3 .hero-image img{object-position:50% 35%}.hero-v3:after{background:linear-gradient(0deg,#19110eeb 0%,#19110eb0 28%,#19110e0a 73%)}.hero-v3 .hero-grid{align-items:end;padding:0 0 76px}.hero-v3 .hero-copy{max-width:100%}.hero-v3 .hero-copy .eyebrow{font-size:9px;margin-bottom:16px}.hero-v3 h1{font-size:clamp(46px,11.5vw,64px);line-height:.97}.hero-v3 .lede{font-size:14px;margin-top:18px;line-height:1.6}.hero-v3 .lede br{display:none}.hero-v3 .button-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}.hero-v3 .button-row .button{width:auto;font-size:12px;padding:12px 16px}.hero-v3 .hero-foot{display:none}.hero-bottom{left:20px;right:20px;bottom:14px;font-size:8px;gap:8px}.hero-v3 .hero-motion-toggle{font-size:9px;padding:8px;white-space:nowrap}.campaign-terreiro{grid-template-columns:1fr;gap:32px}.campaign-tall{padding-top:0;width:85%;justify-self:end}.campaign-daily-grid{grid-template-columns:1fr 1fr;gap:20px}.campaign-daily-grid figure:nth-child(2){padding-top:40px}.campaign-daily-copy{grid-column:1/-1;padding-top:12px}.campaign-photo .image-label{font-size:8px}.campaign-daily-copy h3{font-size:35px}}
+@media(prefers-reduced-motion:reduce){.hero-v3 .hero-image{transform:none!important}.campaign-photo img{transition:none}.campaign-photo:hover img{transform:none}}

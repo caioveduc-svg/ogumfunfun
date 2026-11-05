@@ -1,0 +1,31 @@
+.collection-landing{gap:56px;padding-top:8px}
+.collection-landing h1{font-size:clamp(45px,4.9vw,70px);max-width:640px;line-height:1.03}
+.collection-landing .eyebrow{font-size:10px;letter-spacing:.13em}
+.collection-landing .image-frame{position:relative;overflow:hidden;border-radius:8px}
+.collection-landing .image-frame img{aspect-ratio:4/5;object-fit:cover}
+.collection-landing .landing-lead{font-size:17px;line-height:1.8;margin-top:24px;max-width:540px}
+.collection-landing .text-link{margin-top:12px}
+.collection-landing .landing-aliases{font-size:12px;margin-top:12px}
+.landing-answer h2,.landing-detail h2{margin-top:16px}
+.landing-answer p:not(.eyebrow),.landing-detail>p:not(.eyebrow){margin-top:24px;line-height:1.85;font-size:16px}
+.landing-checklist{background:var(--surface);padding:40px;align-self:start;border-radius:8px}
+.landing-checklist h3{margin-top:16px;font-size:34px}
+.landing-checklist ul{padding-left:20px;margin-block:24px}
+.landing-checklist li{padding-block:8px;font-size:15px}
+.landing-resource-links{display:grid;gap:12px;margin-top:24px;font-size:14px}
+.landing-process{padding-left:32px;border-left:1px solid var(--line)}
+.landing-process ol{list-style:none;counter-reset:order;padding:0;margin-top:24px}
+.landing-process li{counter-increment:order;position:relative;padding-left:44px;margin-top:24px}
+.landing-process li:before{content:'0' counter(order);position:absolute;left:0;top:0;font:26px var(--serif);color:var(--craft)}
+.landing-process strong{font-size:15px;font-weight:400}
+.landing-process li p{font-size:14px;margin-top:8px}
+.landing-helper{border:1px solid #cdbda8;border-radius:8px;padding:32px}
+.landing-helper h3{margin-top:16px;font-size:36px}
+.landing-helper p:not(.eyebrow){margin-top:20px;font-size:15px}
+.landing-helper .button{margin-top:24px}
+.collection-final .eyebrow{margin-bottom:16px}
+.landing-related{display:flex;gap:32px;flex-wrap:wrap;margin-top:24px}
+.landing-related a{min-height:44px;display:flex;gap:16px;align-items:center;font-size:16px}
+@media(max-width:800px){.collection-landing{gap:32px}.collection-landing h1{font-size:48px}.landing-checklist{padding:24px}.landing-process{padding-left:24px}}
+@media(max-width:560px){.collection-landing h1{font-size:46px}.collection-landing .image-frame img{aspect-ratio:4/3}.collection-landing .landing-lead{font-size:16px}.collection-landing .button{max-width:100%;text-align:left;justify-content:space-between}.landing-answer .grid-2,.section .grid-2{grid-template-columns:1fr}.landing-checklist{padding:24px}.landing-helper{padding:24px}.landing-process{padding-left:0;border-left:0}.landing-related{gap:12px 24px}}
+
