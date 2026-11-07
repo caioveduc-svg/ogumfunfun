@@ -1,0 +1,9 @@
+.instagram-footer{display:inline-flex!important;align-items:center;gap:9px}.instagram-footer svg{flex:none}
+.instagram-invite{position:fixed;right:20px;bottom:20px;z-index:900;width:342px;max-width:calc(100vw - 40px);padding:24px;background:#FBF9F4;border:1px solid #d9cebd;border-radius:10px;box-shadow:0 8px 36px #382a181a;color:#594732;animation:instagram-arrive .28s ease-out}
+.instagram-invite[hidden]{display:none!important}.instagram-invite-close{position:absolute;right:5px;top:5px;display:grid;place-items:center;width:44px;height:44px;border:0;background:transparent;color:inherit;border-radius:6px;cursor:pointer}
+.instagram-invite-close:hover{background:#EDE6D8}.instagram-invite-label{display:flex;align-items:center;gap:8px;margin:0 24px 14px 0!important;font-size:9px!important;letter-spacing:.12em;line-height:1.5!important}
+.instagram-invite h2{font-family:var(--serif);font-size:30px;line-height:1.12;letter-spacing:-.025em;font-weight:400;margin:0 0 12px}.instagram-invite>p:not(.instagram-invite-label){font-size:13px;line-height:1.6;margin:0 0 18px}
+.instagram-invite>.button{display:flex;justify-content:center;width:100%;min-height:44px;font-size:12px;padding:12px}.instagram-invite-handle{display:block;text-align:center;margin-top:9px;font-size:11px;color:#78654f}
+@keyframes instagram-arrive{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:540px){.instagram-invite{right:12px;bottom:12px;max-width:calc(100vw - 24px);width:320px;padding:20px}.instagram-invite h2{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.instagram-invite{animation:none}}

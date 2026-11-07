@@ -34,5 +34,6 @@
   document.addEventListener('click', event => {
     if (!loaded || getChoice() !== 'accepted') return;
     if (event.target.closest('[data-track-whatsapp]')) window.clarity('event', 'whatsapp_click');
+    if (event.target.closest('[data-instagram-link]')) window.clarity('event', 'instagram_click');
   }, true);
 })();
