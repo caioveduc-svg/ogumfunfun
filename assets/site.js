@@ -103,7 +103,7 @@
     a.addEventListener('click', () => track('whatsapp_click'));
   });
   $$('[data-privacy-open]').forEach(button => button.addEventListener('click', () => {
-    const panel = $('#privacy-panel'); panel.hidden = false; $('[data-privacy-close]', panel)?.focus();
+    const panel = $('#privacy-panel'); panel.hidden = false; $('[data-analytics-reject]', panel)?.focus();
   }));
   $('[data-privacy-close]')?.addEventListener('click', () => { $('#privacy-panel').hidden = true; $('[data-privacy-open]')?.focus(); });
 
