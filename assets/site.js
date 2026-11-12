@@ -114,7 +114,7 @@
   if (!form) return;
   const config = JSON.parse($('#config-data').textContent);
   const cache = safeGet('of-piece-v1');
-  const defaults = { model: '', kind: 'confirmar', threads: 'confirmar', entity: '', colors: [], customColors: '', length: 'unknown', customLength: '', finish: 'confirmar', delivery: 'confirmar', beads: 'confirmar', firm: 'confirmar', extras: [], notes: '', name: '', cep: '', quantity: '1', step: 0, requestId: `OF-${Date.now().toString(36).toUpperCase()}` };
+  const defaults = { model: '', kind: 'confirmar', threads: 'confirmar', entity: '', quality: '', colors: [], customColors: '', length: 'unknown', customLength: '', finish: 'confirmar', delivery: 'confirmar', beads: 'confirmar', firm: 'confirmar', extras: [], notes: '', name: '', cep: '', quantity: '1', step: 0, requestId: `OF-${Date.now().toString(36).toUpperCase()}` };
   let state = cache && Date.now() - cache.savedAt < 86400000 ? { ...defaults, ...cache.state } : { ...defaults };
   state.colors = Array.isArray(state.colors) ? state.colors.slice(0, 4) : [];
   state.extras = Array.isArray(state.extras) ? state.extras : [];
@@ -127,7 +127,7 @@
     if (preset) Object.assign(state, { model: preset.id, kind: preset.kind, threads: String(preset.threads) });
     state.entry = entry;
   }
-  const fields = ['entity', 'customColors', 'kind', 'threads', 'length', 'customLength', 'finish', 'delivery', 'beads', 'firm', 'notes', 'name', 'cep', 'quantity'];
+  const fields = ['entity', 'quality', 'customColors', 'kind', 'threads', 'length', 'customLength', 'finish', 'delivery', 'beads', 'firm', 'notes', 'name', 'cep', 'quantity'];
   const error = $('#config-error');
   let current = state.step;
   if (!state.model) current = state.step = 0;
@@ -165,6 +165,7 @@
     ['Tipo de peça', labels.kind[state.kind] || 'A confirmar'],
     ['Fios', state.threads === 'confirmar' ? 'A confirmar' : state.threads],
     ['Referência', state.entity || 'A confirmar'],
+    ...(state.quality ? [['Qualidade / referência da casa', state.quality]] : []),
     ['Cores', [...state.colors, state.customColors].filter(Boolean).join(', ') || 'A confirmar'],
     ['Comprimento', lengthLabel()], ['Montagem', labels.finish[state.finish]], ['Como receber', labels.delivery[state.delivery]],
     ['Miçangas', labels.beads[state.beads]], ['Firma', labels.firm[state.firm]], ['Detalhes', state.extras.join(', ') || 'Nenhum detalhe extra definido'],

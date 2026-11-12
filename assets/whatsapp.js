@@ -12,6 +12,7 @@
     const kind={guia:'Guia',braja:'Brajá',chicote:'Chicote'}[s.kind];
     if(kind) lines.push(`*Peça:* ${kind}${['1','3','7'].includes(String(s.threads))?' de '+s.threads+(String(s.threads)==='1'?' fio':' fios'):''}`);
     if(clean(s.entity)) lines.push(`*Referência:* ${clean(s.entity)}`);
+    if(clean(s.quality)) lines.push(`*Qualidade / referência da casa:* ${clean(s.quality)}`);
     const colors=[...(s.colors||[]),clean(s.customColors)].filter(Boolean);
     if(colors.length) lines.push(`*Cores:* ${colors.join(', ')}`);
     if(s.length!=='unknown'&&s.length) lines.push(`*Medida:* ${s.length==='custom'?clean(s.customLength):s.length} cm (peça estendida)`);
