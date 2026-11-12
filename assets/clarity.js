@@ -25,10 +25,10 @@
     window.dataLayer = (window.dataLayer || []).filter(item => !item.event);
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
-    window.gtag('event', 'visit_origin', { ...originParameters(), send_to: 'G-PC8WVWY5B9' });
     const manager = document.createElement('script');
     manager.async = true;
     manager.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K2844592';
+    manager.onload = () => window.gtag('event', 'visit_origin', { ...originParameters(), send_to: 'G-PC8WVWY5B9' });
     document.head.appendChild(manager);
     window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
     window.clarity('consentv2', { analytics_storage: 'granted', ad_storage: 'denied' });
