@@ -31,9 +31,14 @@
   panel.querySelector('[data-analytics-reject]')?.addEventListener('click', () => choose('rejected'));
   if (getChoice() === 'accepted') start();
   else if (!getChoice() && production) panel.hidden = false;
+  const allowedEvents = new Set(['whatsapp_click', 'configurator_start', 'configurator_complete', 'configurator_reset']);
+  document.addEventListener('of:analytics', event => {
+    if (loaded && getChoice() === 'accepted' && allowedEvents.has(event.detail)) {
+      window.clarity('event', event.detail);
+    }
+  });
   document.addEventListener('click', event => {
     if (!loaded || getChoice() !== 'accepted') return;
-    if (event.target.closest('[data-track-whatsapp]')) window.clarity('event', 'whatsapp_click');
     if (event.target.closest('[data-instagram-link]')) window.clarity('event', 'instagram_click');
   }, true);
 })();

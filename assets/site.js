@@ -5,9 +5,10 @@
   const safeGet = key => { try { return JSON.parse(sessionStorage.getItem(key)); } catch { return null; } };
   const safeSet = (key, value) => { try { sessionStorage.setItem(key, JSON.stringify(value)); } catch {} };
   const track = event => {
-    // Somente nomes genéricos. Nenhum pixel externo é instalado na V1.
+    // Somente nomes genéricos; o adaptador externo exige consentimento.
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event });
+    document.dispatchEvent(new CustomEvent('of:analytics', { detail: event }));
   };
   const params = new URLSearchParams(location.search);
   const attribution = window.OgumAttribution;
@@ -100,7 +101,9 @@
 
   $$('a[href^="https://wa.me/"]').forEach(a => {
     if (attribution) a.href = attribution.decorate(a.href, origin, location.pathname);
-    a.addEventListener('click', () => track('whatsapp_click'));
+  });
+  document.addEventListener('click', event => {
+    if (event.target.closest('a[href^="https://wa.me/"]')) track('whatsapp_click');
   });
   $$('[data-privacy-open]').forEach(button => button.addEventListener('click', () => {
     const panel = $('#privacy-panel'); panel.hidden = false; $('[data-analytics-reject]', panel)?.focus();
