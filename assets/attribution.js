@@ -11,8 +11,8 @@
   const clean = (value, max = 80) => String(value || '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
   const path = value => clean(String(value || '/').split(/[?#]/)[0], 250);
   const hostIs = (host, domain) => host === domain || host.endsWith('.' + domain);
-  const ai = host => ['chatgpt.com', 'chat.openai.com', 'perplexity.ai', 'claude.ai', 'copilot.microsoft.com'].find(domain => hostIs(host, domain));
-  const aiLabel = domain => ({ 'chatgpt.com': 'ChatGPT', 'chat.openai.com': 'ChatGPT', 'perplexity.ai': 'Perplexity', 'claude.ai': 'Claude', 'copilot.microsoft.com': 'Copilot' })[domain];
+  const ai = host => ({ chatgpt: 'chatgpt.com', openai: 'chat.openai.com', gemini: 'gemini.google.com', perplexity: 'perplexity.ai', claude: 'claude.ai', copilot: 'copilot.microsoft.com' })[host] || ['chatgpt.com', 'chat.openai.com', 'gemini.google.com', 'perplexity.ai', 'claude.ai', 'copilot.microsoft.com'].find(domain => hostIs(host, domain));
+  const aiLabel = domain => ({ 'chatgpt.com': 'ChatGPT', 'chat.openai.com': 'ChatGPT', 'gemini.google.com': 'Gemini', 'perplexity.ai': 'Perplexity', 'claude.ai': 'Claude', 'copilot.microsoft.com': 'Copilot' })[domain];
   const isMeta = source => ['meta', 'facebook', 'fb', 'instagram', 'ig', 'facebook.com', 'instagram.com'].includes(source);
   const paid = medium => /^(cpc|ppc|paid|paid_social|social_paid|paid-social|paidsocial|cpm|display)$/.test(medium);
   const unknown = () => ({ channel: 'direto-ou-desconhecido', source: 'nao-identificada', label: 'Direto / origem não identificada' });

@@ -7,6 +7,17 @@
   let loaded = false;
   const production = location.hostname === 'ogumfunfun.com.br';
   const getChoice = () => { try { return localStorage.getItem(key); } catch { return null; } };
+  const originParameters = () => {
+    try {
+      const origin = JSON.parse(sessionStorage.getItem('of-origin-v2'));
+      const source = origin?.last;
+      if (!source || Date.now() - origin.startedAt >= 86400000) return { traffic_origin: 'unidentified' };
+      // Fixed platform/channel labels only: never free text, names, CEP or order details.
+      const known = { 'chatgpt.com': 'chatgpt', 'chat.openai.com': 'chatgpt', chatgpt: 'chatgpt', openai: 'chatgpt', 'gemini.google.com': 'gemini', gemini: 'gemini', 'perplexity.ai': 'perplexity', perplexity: 'perplexity', 'claude.ai': 'claude', claude: 'claude', 'copilot.microsoft.com': 'copilot', copilot: 'copilot' };
+      const channel = ['ia-referenciada', 'busca-organica', 'midia-paga', 'utm', 'referencia', 'clique-identificado'].includes(source.channel) ? source.channel : 'unidentified';
+      return { traffic_origin: known[source.source] || channel };
+    } catch { return { traffic_origin: 'unidentified' }; }
+  };
   const start = () => {
     if (loaded || !production) return;
     loaded = true;
@@ -14,6 +25,7 @@
     window.dataLayer = (window.dataLayer || []).filter(item => !item.event);
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
+    window.gtag('event', 'visit_origin', { ...originParameters(), send_to: 'G-PC8WVWY5B9' });
     const manager = document.createElement('script');
     manager.async = true;
     manager.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K2844592';
@@ -43,6 +55,7 @@
   document.addEventListener('of:analytics', event => {
     if (loaded && getChoice() === 'accepted' && allowedEvents.has(event.detail)) {
       window.clarity('event', event.detail);
+      window.gtag('event', event.detail, { ...originParameters(), send_to: 'G-PC8WVWY5B9' });
     }
   });
   document.addEventListener('click', event => {
