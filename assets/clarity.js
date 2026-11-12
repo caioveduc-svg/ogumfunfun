@@ -10,6 +10,14 @@
   const start = () => {
     if (loaded || !production) return;
     loaded = true;
+    // Do not replay interactions made before the visitor accepted analytics.
+    window.dataLayer = (window.dataLayer || []).filter(item => !item.event);
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    const manager = document.createElement('script');
+    manager.async = true;
+    manager.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K2844592';
+    document.head.appendChild(manager);
     window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
     window.clarity('consentv2', { analytics_storage: 'granted', ad_storage: 'denied' });
     const tag = document.createElement('script');
